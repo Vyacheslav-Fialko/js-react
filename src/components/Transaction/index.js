@@ -1,9 +1,11 @@
+import { Wrapper } from "./styles";
+
 const Transaction = ({ label, value, date }) => (
-  <div>
+  <Wrapper value={value}>
     <h4>Label: {label}</h4>
     <p>Value: {value}</p>
     <p>Date: {date}</p>
-  </div>
+  </Wrapper>
 );
 
 export default Transaction;

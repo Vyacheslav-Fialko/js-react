@@ -10,10 +10,13 @@ class Form extends Component {
 
   onSubmit = (e) => {
     e.preventDefault();
-    this.props.onChange(this.state.value);
+    if(this.state.value){
+      this.props.onChange(this.state.value);
     this.setState({
       value: "",
     });
+    }
+    return false
   };
 
   onChange = (e) => {

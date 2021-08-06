@@ -1,43 +1,42 @@
-import { Component } from "react";
-import Balance from "./components/Balance";
-import Form from "./components/Form";
-import Transactions from "./components/Transactions";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import About from "./components/About";
+import Home from "./components/Home";
+import Statistics from "./components/Statistics";
 
-class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      balance: 0,
-      transactions: [],
-    };
-  }
+import { GlobalStyle, Wrapper } from "./styles";
 
-  onChange = (value) => {
-    this.setState((state) => ({
-      balance: state.balance + Number(value),
-      transactions: [
-        {
-          label: "decrease",
-          value: value,
-          id: Date.now(),
-          date: new Date().toLocaleString(),
-        },
-        ...state.transactions,
-      ],
-    }));
-  };
-
-  render() {
-    const { balance, transactions } = this.state;
-    return (
-      <div>
-        <Balance balance={balance} />
-        <Form onChange={this.onChange} />
-        <hr />
-        <Transactions transactions={transactions} />
-      </div>
-    );
-  }
-}
+const App = () => {
+  return (
+    <Router>
+      <Wrapper>
+        <GlobalStyle />
+        <nav>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/statistics">Statistics</Link>
+          </li>
+          <li>
+            <Link to="/about">About</Link>
+          </li>
+        </ul>
+        </nav>
+        <Switch>
+          <Route path='/about'>
+            <About/>
+          </Route>
+          <Route path='/statistics'>
+            <Statistics/>
+          </Route>
+          <Route exact path='/'>
+            <Home/>
+          </Route>
+        </Switch>
+      </Wrapper>
+    </Router>
+  );
+};
 
 export default App;
